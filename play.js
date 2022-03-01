@@ -3,7 +3,7 @@ const Discord = require('discord.js')
 
 
 module.exports = {
-  name: 'play',
+  name: '재생',
   description: '노래를 재생해요.',
   async execute(message, args, client, track) {
     console.log(`${message.author.tag}명령어 호출 - 재생`)
