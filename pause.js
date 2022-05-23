@@ -5,8 +5,11 @@ module.exports = {
     description: "노래를 일시정지해요.",
     async execute(message, args, client, track, interaction) {
         const queue = client.player.getQueue(message.guild.id);
-        if (!queue || !queue.playing) return message.reply('<a:x_:941623055703236639> 재생되고 있는 노래가 없습니다');
-        if (!message.member || !message.member.voice.channel) return message.reply('<a:x_:941623055703236639> 먼저 음성 채널에 가입하세요')
+ if (!message.member || !message.member.voice.channel) return message.reply({ content: '<a:x_:941623055703236639> 먼저 음성 채널에 들어가주세요.' })
+
+        if (!queue || !queue.playing) return message.reply({ content: '<a:x_:941623055703236639> 현재 재생되고 있는 음악이 없습니다.' })
+
+        if (message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.reply({ content: '<a:x_:941623055703236639> 봇이 있는 음성 채널에 들어가 주십시오.' })
         const paused = queue.setPaused(true);
           let pausedembed = new Discord.MessageEmbed()
           .setColor("GREEN")
